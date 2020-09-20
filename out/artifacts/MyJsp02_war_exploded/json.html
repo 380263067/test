@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var jsonobj={
+            "key1":12,
+            "key2":"abc",
+            "key3":{"key_1":500,"key_2":"abc"},
+            "key4":[{"key_3":600},{"key_4":"abc"},{"key_1":500,"key_2":"abc"}]
+        };
+        console.log(jsonobj.key1+" "+jsonobj.key4)
+        for (var i in jsonobj.key4) {
+            console.log(jsonobj.key4[i]);
+        };
+/*        for (var c in jsonobj){
+            console.log(jsonobj[c]);
+        }*/
+       var s = JSON.stringify(jsonobj);
+       var parse = JSON.parse(s);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

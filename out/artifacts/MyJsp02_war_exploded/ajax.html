@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--ajax是前台与服务器交换数据的技术-->
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        function jsajaxget() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET","servlet4?id=1234",true);
+            xhr.send();
+            xhr.onreadystatechange=function () {
+                if (xhr.readyState==4&&xhr.status==200){
+                    var data = xhr.responseText;
+                    document.getElementById("div").innerText=data;
+                }
+            }
+        }
+        <!--post的请求需要设置send()的值，并设置请求头信息-->
+        function jsajaxpost() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST","servlet4",true);
+            xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xhr.send("id=789");
+            xhr.onreadystatechange=function () {
+                if (xhr.readyState==4&&xhr.status==200){
+                    var data = xhr.responseText;
+                    document.getElementById("div").innerText=data;
+                }
+            }
+        }
+        function jqueryajaxget() {
+            /*参数url 回调函数callback （data，status（状态码）） */
+            $.get("servlet4?id=1234",function (data, status) {
+                 console.log(status);
+                 //响应的数据写入div
+                $("#div").text(data);
+            });
+        }
+        function jqueryajaxpost() {
+            /*post 多了个参数 */
+            $.post("servlet4","id=456",function (data, status) {
+                console.log(status);
+                //响应的数据写入div
+                $("#div").text(data);
+            });
+        }
+        function axiosget() {
+            axios.get('servlet?id=12345')
+                .then(function (response) {
+                    console.log(response);
+                    document.getElementById("div").innerText=response.data.name;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        }
+    </script>
+</head>
+<body>
+<h4>以下是服务器取的数据</h4>
+<div id="div" style="border:1px red solid ; height: 250px;width: 300px">
+</div>
+<button onclick="jsajaxget()">ajaxGET实现</button>
+<button onclick="jsajaxpost()">ajaxPOST实现</button><br>
+<button onclick="jqueryajaxget()">jqueryAjaxGET实现</button>
+<button onclick="jqueryajaxpost()">jqueryAjaxPOST实现</button>
+<button onclick="axiosget()">axiosGET实现</button>
+</body>
+</html>
